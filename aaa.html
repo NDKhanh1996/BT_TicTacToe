@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Ứng dụng cờ caro</h1>
+<button type="button" id="btn1" onclick="plx()">Play</button>
+<p id="board"></p>
+<script>
+    let board = []
+    let data = ''
+    for (let i = 0; i < 5; i++) {
+        board[i] = ['*', '*', '*', '*', '*']
+    }
+    for (let i = 0; i < 5; i++) {
+        data += '<br>'
+        for (let j = 0; j < 5; j++) {
+            data += board[i][j] + '&nbsp;&nbsp;&nbsp;&nbsp;'
+        }
+    }
+    document.getElementById('board').innerHTML = data;
+    function plx() {
+        let X = +prompt('X : ')
+        let Y = +prompt('Y : ')
+        board[X][Y] = prompt('Nhâp X hoặc O').toUpperCase()
+        data = '';
+        for (let i = 0; i < 5; i++) {
+            data += '<br>';
+            for (let j = 0; j < 5; j++) {
+                data += board[i][j] + '&nbsp;&nbsp;&nbsp;&nbsp;';
+            }
+        }
+        document.getElementById('board').innerHTML = data;
+        checkWin();
+    }
+
+        function checkWin() {
+            // KT duong ngang
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j <= 2; j++) {
+                    if (board[i][j] !== '*' && board[i][j] === board[i][j + 1] && board[i][j] === board[i][j + 2]) {
+                        alert('end');
+                        return;
+                    }
+                }
+            }
+
+            // Kt duong doc
+            for (let j = 0; j < 5; j++) {
+                for (let i = 0; i <= 2; i++) {
+                    if (board[i][j] !== '*' && board[i][j] === board[i + 1][j] && board[i][j] === board[i + 2][j]) {
+                        alert('end');
+                        return;
+                    }
+                }
+            }
+
+            // KT duong cheo 1
+            for (let i = 0; i <= 2; i++) {
+                for (let j = 0; j <= 2; j++) {
+                    if (board[i][j] !== '*' && board[i][j] === board[i + 1][j + 1] && board[i][j] === board[i + 2][j + 2]) {
+                        alert('end');
+                        return;
+                    }
+                }
+            }
+
+            // KT duong cheo 2
+            for (let i = 0; i <= 2; i++) {
+                for (let j = 2; j < 5; j++) {
+                    if (board[i][j] !== '*' && board[i][j] === board[i + 1][j - 1] && board[i][j] === board[i + 2][j - 2]) {
+                        alert('end');
+                        return;
+                    }
+                }
+            }
+        }
+
+
+
+</script>
+</body>
+</html>
